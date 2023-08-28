@@ -31,6 +31,9 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.MessagingStyle.Message;
 import android.support.v4.media.app.NotificationCompat.MediaStyle;
 import android.support.v4.media.session.MediaSessionCompat;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.M;
+					  
 
 import java.util.List;
 import java.util.Random;
@@ -39,6 +42,8 @@ import de.appplant.cordova.plugin.notification.action.Action;
 
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+ 
+
 import static de.appplant.cordova.plugin.notification.Notification.EXTRA_UPDATE;
 
 /**
@@ -324,8 +329,12 @@ public final class Builder {
 
         int reqCode = random.nextInt();
 
+	int flags = FLAG_UPDATE_CURRENT;
+		if (android.os.Build.VERSION.SDK_INT >= 31) {
+			flags = 33554432 | FLAG_UPDATE_CURRENT;
+		}
         PendingIntent deleteIntent = PendingIntent.getBroadcast(
-                context, reqCode, intent, FLAG_UPDATE_CURRENT);
+                context, reqCode, intent, flags);
 
         builder.setDeleteIntent(deleteIntent);
     }
@@ -353,8 +362,12 @@ public final class Builder {
 
         int reqCode = random.nextInt();
 
+		int flags = FLAG_UPDATE_CURRENT;
+		if (android.os.Build.VERSION.SDK_INT >= 31) {
+			flags = 33554432 | FLAG_UPDATE_CURRENT;
+		}
         PendingIntent contentIntent = PendingIntent.getActivity(
-                context, reqCode, intent, FLAG_UPDATE_CURRENT);
+                context, reqCode, intent, flags);
 
         builder.setContentIntent(contentIntent);
     }

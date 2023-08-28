@@ -24,7 +24,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="cordova-plugin-local-notification"
-        version="0.9.0-beta.3">
+        version="0.9.0-beta.3M">
 
     <name>LocalNotification</name>
 
@@ -135,6 +135,7 @@
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
             <uses-permission android:name="android.permission.WAKE_LOCK" />
+			<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
         </config-file>
 
         <source-file
